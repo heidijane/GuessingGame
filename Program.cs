@@ -23,12 +23,27 @@ namespace GuessingGame
                     Console.WriteLine("You guessed correctly!");
                     break; //breaks out of the loop
                 }
+                else if (parsedUserGuess < secretNumber)
+                {
+                    Console.WriteLine("Number too low.");
+                }
                 else
                 {
-                    Console.WriteLine("Sorry, that was incorrect.");
+
+                    Console.WriteLine("Number too high.");
                 }
 
                 guessesGiven++;
+
+                if (guessesGiven != 4)
+                {
+                    Console.WriteLine("Try again!");
+                }
+                else
+                {
+                    Console.WriteLine("Game Over.");
+                }
+                Console.WriteLine();
             }
 
         }
