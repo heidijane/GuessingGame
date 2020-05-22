@@ -17,6 +17,7 @@ namespace GuessingGame
 
             int maxTries = 0;
             bool hasUserChosenDifficulty = false;
+            bool cheaterMode = false;
 
             while (hasUserChosenDifficulty == false)
             {
@@ -25,16 +26,25 @@ namespace GuessingGame
                 if (userDifficulty == "Easy")
                 {
                     maxTries = 8;
+                    Console.WriteLine("Easy Mode: you get 8 guesses");
                     break;
                 }
                 else if (userDifficulty == "Medium")
                 {
                     maxTries = 6;
+                    Console.WriteLine("Medium Mode: you get 6 guesses");
                     break;
                 }
                 else if (userDifficulty == "Hard")
                 {
                     maxTries = 4;
+                    Console.WriteLine("Hard Mode: you get 4 guesses");
+                    break;
+                }
+                else if (userDifficulty == "Cheater")
+                {
+                    Console.WriteLine("Cheater mode activated! You now have infinite guesses. ;P");
+                    cheaterMode = true;
                     break;
                 }
                 else
@@ -46,9 +56,9 @@ namespace GuessingGame
 
             Console.WriteLine();
 
-            while (guessesGiven < maxTries)
+            while (guessesGiven < maxTries || cheaterMode == true)
             {
-                Console.WriteLine($"Guess the secret number! Your guess ({guessesGiven + 1})");
+                Console.WriteLine("Guess the secret number!");
 
                 string userGuess = Console.ReadLine();
                 int parsedUserGuess = Int32.Parse(userGuess); //int and Int32 are the same method
@@ -58,17 +68,36 @@ namespace GuessingGame
                     Console.WriteLine("You guessed correctly! YOU WIN!");
                     break; //breaks out of the loop
                 }
-                else if (parsedUserGuess < secretNumber)
+                else if (parsedUserGuess > secretNumber)
                 {
-                    Console.WriteLine("Number too low.");
+                    if ((parsedUserGuess - secretNumber) < 10)
+                    {
+                        Console.WriteLine($"Go a little lower.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Go lower.");
+                    }
                 }
                 else
                 {
+                    if ((secretNumber - parsedUserGuess) < 10)
+                    {
+                        Console.WriteLine($"Go a little higher.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Go higher.");
+                    }
 
-                    Console.WriteLine("Number too high.");
                 }
 
                 guessesGiven++;
+
+                if (cheaterMode != true)
+                {
+                    Console.WriteLine($"{maxTries - guessesGiven} {((maxTries - guessesGiven) == 1 ? "try" : "tries")} left");
+                }
 
                 if (guessesGiven != maxTries)
                 {
