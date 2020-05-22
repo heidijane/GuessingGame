@@ -11,7 +11,42 @@ namespace GuessingGame
 
             int guessesGiven = 0;
 
-            while (guessesGiven < 4)
+            Console.WriteLine("Welcome to...");
+            Console.WriteLine("~~*The Guessing Game*~~");
+            Console.WriteLine("Please input your difficulty (Easy, Medium, or Hard)");
+
+            int maxTries = 0;
+            bool hasUserChosenDifficulty = false;
+
+            while (hasUserChosenDifficulty == false)
+            {
+                string userDifficulty = Console.ReadLine();
+
+                if (userDifficulty == "Easy")
+                {
+                    maxTries = 8;
+                    break;
+                }
+                else if (userDifficulty == "Medium")
+                {
+                    maxTries = 6;
+                    break;
+                }
+                else if (userDifficulty == "Hard")
+                {
+                    maxTries = 4;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid difficulty given, please input Easy, Medium, or Hard.");
+                    continue;
+                }
+            }
+
+            Console.WriteLine();
+
+            while (guessesGiven < maxTries)
             {
                 Console.WriteLine($"Guess the secret number! Your guess ({guessesGiven + 1})");
 
@@ -20,7 +55,7 @@ namespace GuessingGame
 
                 if (parsedUserGuess == secretNumber)
                 {
-                    Console.WriteLine("You guessed correctly!");
+                    Console.WriteLine("You guessed correctly! YOU WIN!");
                     break; //breaks out of the loop
                 }
                 else if (parsedUserGuess < secretNumber)
@@ -35,7 +70,7 @@ namespace GuessingGame
 
                 guessesGiven++;
 
-                if (guessesGiven != 4)
+                if (guessesGiven != maxTries)
                 {
                     Console.WriteLine("Try again!");
                 }
