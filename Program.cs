@@ -6,7 +6,7 @@ namespace GuessingGame
     {
         static void Main(string[] args)
         {
-            Random rand = new Random(); //Random is a data type! creates a new Ranom class
+            Random rand = new Random(); //Random is a data type! creates a new Random class
             int secretNumber = rand.Next(1, 101); //gets you a non-negative random integer between 1 and 100
 
             int guessesGiven = 0;
